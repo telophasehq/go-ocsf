@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	ocsf "github.com/Santiago-Labs/go-ocsf/ocsf/v1_4_0"
+	ocsf "github.com/telophasehq/go-ocsf/ocsf/v1_4_0"
 )
 
 type batch struct{ evts []ocsf.APIActivity }

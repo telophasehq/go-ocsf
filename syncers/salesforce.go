@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Santiago-Labs/go-ocsf/clients/salesforce"
-	"github.com/Santiago-Labs/go-ocsf/datastore"
-	ocsf "github.com/Santiago-Labs/go-ocsf/ocsf/v1_4_0"
+	"github.com/telophasehq/go-ocsf/clients/salesforce"
+	"github.com/telophasehq/go-ocsf/datastore"
+	ocsf "github.com/telophasehq/go-ocsf/ocsf/v1_4_0"
 )
 
 type LogFileRecord struct {

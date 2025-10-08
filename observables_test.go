@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Santiago-Labs/go-ocsf/ocsf/v1_5_0"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/telophasehq/go-ocsf/ocsf/v1_5_0"
 )
 
 type validatesObservable interface {
