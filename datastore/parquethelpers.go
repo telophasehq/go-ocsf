@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Santiago-Labs/go-ocsf/ocsf"
 	"github.com/apache/arrow-go/v18/arrow"
 	"github.com/apache/arrow-go/v18/arrow/memory"
 	"github.com/apache/arrow-go/v18/parquet/file"    // For reading parquet back to arrow
@@ -14,6 +13,7 @@ import (
 	"github.com/apache/iceberg-go"
 	"github.com/apache/iceberg-go/table"
 	"github.com/parquet-go/parquet-go"
+	"github.com/telophasehq/go-ocsf/ocsf"
 )
 
 func serializeFindingsToParquet(findings []ocsf.VulnerabilityFinding, schema *parquet.Schema) ([]byte, error) {

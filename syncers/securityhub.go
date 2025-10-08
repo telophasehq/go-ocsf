@@ -6,12 +6,12 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/Santiago-Labs/go-ocsf/datastore"
-	ocsf "github.com/Santiago-Labs/go-ocsf/ocsf/v1_4_0"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/samsarahq/go/oops"
+	"github.com/telophasehq/go-ocsf/datastore"
+	ocsf "github.com/telophasehq/go-ocsf/ocsf/v1_4_0"
 )
 
 type SecurityHubOCSFSyncer struct {

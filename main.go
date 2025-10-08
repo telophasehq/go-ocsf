@@ -7,12 +7,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/Santiago-Labs/go-ocsf/clients/snyk"
-	"github.com/Santiago-Labs/go-ocsf/clients/tenable"
-	"github.com/Santiago-Labs/go-ocsf/datastore"
-	"github.com/Santiago-Labs/go-ocsf/syncers"
-	"github.com/Santiago-Labs/go-ocsf/syncers/cloudtrail"
-	"github.com/Santiago-Labs/go-ocsf/syncers/gcpauditlog"
+	"github.com/telophasehq/go-ocsf/clients/snyk"
+	"github.com/telophasehq/go-ocsf/clients/tenable"
+	"github.com/telophasehq/go-ocsf/datastore"
+	"github.com/telophasehq/go-ocsf/syncers"
+	"github.com/telophasehq/go-ocsf/syncers/cloudtrail"
+	"github.com/telophasehq/go-ocsf/syncers/gcpauditlog"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"

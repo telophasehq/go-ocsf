@@ -1,15 +1,15 @@
 <div align="center">
 <img src="https://github.com/user-attachments/assets/c4217cad-018c-4550-8ac5-8958d5888c54" height= "auto" width="200" />
 <br />
-<h1>Santiago-Labs/go-ocsf </h1>
+<h1>telophasehq/go-ocsf </h1>
 <h3>
 Convert data from any of your security tools to OCSF. Developed by <a href="https://telophase.dev">
 Telophase</a>.
 </h3>
-<a href="https://github.com/Santiago-Labs/go-ocsf/actions/workflows/ci.yml"><img src="https://github.com/Santiago-Labs/go-ocsf/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
-<a href="https://goreportcard.com/report/github.com/Santiago-Labs/go-ocsf"><img src="https://goreportcard.com/badge/github.com/Santiago-Labs/go-ocsf" alt="Go Report Card"></a>
-<a href="https://pkg.go.dev/github.com/Santiago-Labs/go-ocsf"><img src="https://pkg.go.dev/badge/github.com/Santiago-Labs/go-ocsf.svg" alt="Go Reference"></a>
-<a href="LICENSE"><img src="https://img.shields.io/github/license/Santiago-Labs/go-ocsf" alt="License"></a>
+<a href="https://github.com/telophasehq/go-ocsf/actions/workflows/ci.yml"><img src="https://github.com/telophasehq/go-ocsf/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
+<a href="https://goreportcard.com/report/github.com/telophasehq/go-ocsf"><img src="https://goreportcard.com/badge/github.com/telophasehq/go-ocsf" alt="Go Report Card"></a>
+<a href="https://pkg.go.dev/github.com/telophasehq/go-ocsf"><img src="https://pkg.go.dev/badge/github.com/telophasehq/go-ocsf.svg" alt="Go Reference"></a>
+<a href="LICENSE"><img src="https://img.shields.io/github/license/telophasehq/go-ocsf" alt="License"></a>
 </div>
 
 `go-ocsf` is a Go library and CLI tool for converting security findings and events from your security tools (e.g., Snyk) into the [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io/) format, with output options in JSON or Parquet formats. Data can be stored locally or seamlessly uploaded to AWS S3.
@@ -27,7 +27,7 @@ Just plug in your API keys, and you're ready to go.
 ## Installation
 
 ```bash
-go get github.com/Santiago-Labs/go-ocsf
+go get github.com/telophasehq/go-ocsf
 ```
 
 ## Quick Start
@@ -67,9 +67,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/Santiago-Labs/go-ocsf/clients/snyk"
-	"github.com/Santiago-Labs/go-ocsf/datastore"
-	"github.com/Santiago-Labs/go-ocsf/syncers"
+	"github.com/telophasehq/go-ocsf/clients/snyk"
+	"github.com/telophasehq/go-ocsf/datastore"
+	"github.com/telophasehq/go-ocsf/syncers"
 )
 
 func main() {

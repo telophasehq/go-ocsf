@@ -1,4 +1,4 @@
-module github.com/Santiago-Labs/go-ocsf
+module github.com/telophasehq/go-ocsf
 
 go 1.24
 
@@ -8,15 +8,16 @@ require (
 	cloud.google.com/go/logging v1.13.0
 	github.com/apache/arrow-go/v18 v18.2.1-0.20250425153947-5ae8b27ab357
 	github.com/apache/iceberg-go v0.2.1-0.20250503182934-3398683761f0
+	github.com/aws/aws-sdk-go v1.55.6
 	github.com/aws/aws-sdk-go-v2 v1.36.3
 	github.com/aws/aws-sdk-go-v2/config v1.29.14
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.4
 	github.com/aws/aws-sdk-go-v2/service/inspector2 v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.2
 	github.com/aws/aws-sdk-go-v2/service/s3tables v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/securityhub v1.57.0
 	github.com/parquet-go/parquet-go v0.25.0
 	github.com/samsarahq/go/oops v0.0.0-20220211150445-4b291d6feac4
+	golang.org/x/sync v0.16.0
 	google.golang.org/api v0.230.0
 	google.golang.org/genproto v0.0.0-20250324211829-b45e905df463
 	google.golang.org/genproto/googleapis/api v0.0.0-20250324211829-b45e905df463
@@ -48,7 +49,6 @@ require (
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/apache/thrift v0.21.0 // indirect
-	github.com/aws/aws-sdk-go v1.55.6 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.10 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.67 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.30 // indirect
@@ -136,7 +136,6 @@ require (
 	golang.org/x/mod v0.26.0 // indirect
 	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/oauth2 v0.29.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
 	golang.org/x/sys v0.34.0 // indirect
 	golang.org/x/term v0.33.0 // indirect
 	golang.org/x/text v0.27.0 // indirect

@@ -4,8 +4,8 @@ package v1_4_0
 import (
 	"fmt"
 
-	"github.com/Santiago-Labs/go-ocsf/ocsf"
 	"github.com/apache/arrow-go/v18/arrow"
+	"github.com/telophasehq/go-ocsf/ocsf"
 )
 
 type ComplianceFinding struct {

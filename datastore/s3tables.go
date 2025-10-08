@@ -7,7 +7,6 @@ import (
 	"reflect"
 	"strings"
 
-	ocsf "github.com/Santiago-Labs/go-ocsf/ocsf/v1_4_0"
 	"github.com/apache/arrow-go/v18/arrow"
 	"github.com/apache/arrow-go/v18/arrow/array"
 	"github.com/apache/iceberg-go"
@@ -16,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables"
 	"github.com/samsarahq/go/oops"
+	ocsf "github.com/telophasehq/go-ocsf/ocsf/v1_4_0"
 
 	_ "github.com/apache/iceberg-go/catalog/rest"
 )
