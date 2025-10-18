@@ -10,14 +10,32 @@ import (
 
 type HTTPActivity struct {
 
+	// Action: The normalized caption of <code>action_id</code>.
+	Action *string `json:"action,omitempty" parquet:"action,optional"`
+
+	// Action ID: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to <code>disposition_id</code> for the outcome of the action.
+	ActionId *int32 `json:"action_id,omitempty" parquet:"action_id,optional"`
+
 	// Activity ID: The normalized identifier of the activity that triggered the event.
 	ActivityId int32 `json:"activity_id" parquet:"activity_id"`
 
 	// Activity: The event activity name, as defined by the activity_id.
 	ActivityName *string `json:"activity_name,omitempty" parquet:"activity_name,optional"`
 
+	// Actor: The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+	Actor *Actor `json:"actor,omitempty" parquet:"actor,optional"`
+
+	// API Details: Describes details about a typical API (Application Programming Interface) call.
+	Api *API `json:"api,omitempty" parquet:"api,optional"`
+
 	// Application Name: The name of the application associated with the event or object.
 	AppName *string `json:"app_name,omitempty" parquet:"app_name,optional"`
+
+	// MITRE ATT&CK® and ATLAS™ Details: An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
+	Attacks []MITREATTCKATLAS `json:"attacks,omitempty" parquet:"attacks,list,optional"`
+
+	// Authorization Information: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+	Authorizations []AuthorizationResult `json:"authorizations,omitempty" parquet:"authorizations,list,optional"`
 
 	// Category: The event category name, as defined by category_uid value: <code>Network Activity</code>.
 	CategoryName *string `json:"category_name,omitempty" parquet:"category_name,optional"`
@@ -31,14 +49,29 @@ type HTTPActivity struct {
 	// Class ID: The unique identifier of a class. A class describes the attributes available in an event.
 	ClassUid int32 `json:"class_uid" parquet:"class_uid"`
 
-	// Cloud: Describes details about the Cloud environment where the event was originally created or logged.
-	Cloud Cloud `json:"cloud" parquet:"cloud"`
+	// Confidence: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+	Confidence *string `json:"confidence,omitempty" parquet:"confidence,optional"`
+
+	// Confidence ID: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+	ConfidenceId *int32 `json:"confidence_id,omitempty" parquet:"confidence_id,optional"`
+
+	// Confidence Score: The confidence score as reported by the event source.
+	ConfidenceScore *int32 `json:"confidence_score,omitempty" parquet:"confidence_score,optional"`
 
 	// Connection Info: The network connection information.
 	ConnectionInfo *NetworkConnectionInformation `json:"connection_info,omitempty" parquet:"connection_info,optional"`
 
 	// Count: The number of times that events in the same logical group occurred during the event <strong>Start Time</strong> to <strong>End Time</strong> period.
 	Count *int32 `json:"count,omitempty" parquet:"count,optional"`
+
+	// Device: An addressable device, computer system or host.
+	Device *Device `json:"device,omitempty" parquet:"device,optional"`
+
+	// Disposition: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+	Disposition *string `json:"disposition,omitempty" parquet:"disposition,optional"`
+
+	// Disposition ID: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+	DispositionId *int32 `json:"disposition_id,omitempty" parquet:"disposition_id,optional"`
 
 	// Destination Endpoint: The responder (server) in a network connection.
 	DstEndpoint *NetworkEndpoint `json:"dst_endpoint,omitempty" parquet:"dst_endpoint,optional"`
@@ -55,6 +88,9 @@ type HTTPActivity struct {
 	// File: The file that is the target of the HTTP activity.
 	File *File `json:"file,omitempty" parquet:"file,optional"`
 
+	// Firewall Rule: The firewall rule that pertains to the control that triggered the event, if applicable.
+	FirewallRule *FirewallRule `json:"firewall_rule,omitempty" parquet:"firewall_rule,optional"`
+
 	// HTTP Cookies: The cookies object describes details about HTTP cookies
 	HttpCookies []HTTPCookie `json:"http_cookies,omitempty" parquet:"http_cookies,list,optional"`
 
@@ -64,8 +100,17 @@ type HTTPActivity struct {
 	// HTTP Response: The HTTP Response from a web server to a requester.
 	HttpResponse *HTTPResponse `json:"http_response,omitempty" parquet:"http_response,optional"`
 
+	// Alert: Indicates that the event is considered to be an alertable signal. Should be set to <code>true</code> if <code>disposition_id = Alert</code> among other dispositions, and/or <code>risk_level_id</code> or <code>severity_id</code> of the event is elevated. Not all control events will be alertable, for example if <code>disposition_id = Exonerated</code> or <code>disposition_id = Allowed</code>.
+	IsAlert *bool `json:"is_alert,omitempty" parquet:"is_alert,optional"`
+
 	// JA4+ Fingerprints: A list of the JA4+ network fingerprints.
 	Ja4FingerprintList []JA4Fingerprint `json:"ja4_fingerprint_list,omitempty" parquet:"ja4_fingerprint_list,list,optional"`
+
+	// Malware: A list of Malware objects, describing details about the identified malware.
+	Malware []Malware `json:"malware,omitempty" parquet:"malware,list,optional"`
+
+	// Malware Scan Info: Describes details about the scan job that identified malware on the target system.
+	MalwareScanInfo *MalwareScanInfo `json:"malware_scan_info,omitempty" parquet:"malware_scan_info,optional"`
 
 	// Message: The description of the event/finding, as defined by the source.
 	Message *string `json:"message,omitempty" parquet:"message,optional"`
@@ -76,14 +121,44 @@ type HTTPActivity struct {
 	// Observables: The observables associated with the event or a finding.
 	Observables []Observable `json:"observables,omitempty" parquet:"observables,list,optional"`
 
-	// OSINT: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
-	Osint []OSINT `json:"osint" parquet:"osint,list"`
+	// Policy: The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
+	Policy *Policy `json:"policy,omitempty" parquet:"policy,optional"`
+
+	// Proxy Connection Info: The connection information from the proxy server to the remote server.
+	ProxyConnectionInfo *NetworkConnectionInformation `json:"proxy_connection_info,omitempty" parquet:"proxy_connection_info,optional"`
+
+	// Proxy Endpoint: The proxy (server) in a network connection.
+	ProxyEndpoint *NetworkProxyEndpoint `json:"proxy_endpoint,omitempty" parquet:"proxy_endpoint,optional"`
+
+	// Proxy HTTP Request: The HTTP Request from the proxy server to the remote server.
+	ProxyHttpRequest *HTTPRequest `json:"proxy_http_request,omitempty" parquet:"proxy_http_request,optional"`
+
+	// Proxy HTTP Response: The HTTP Response from the remote server to the proxy server.
+	ProxyHttpResponse *HTTPResponse `json:"proxy_http_response,omitempty" parquet:"proxy_http_response,optional"`
+
+	// Proxy TLS: The TLS protocol negotiated between the proxy server and the remote server.
+	ProxyTls *TransportLayerSecurityTLS `json:"proxy_tls,omitempty" parquet:"proxy_tls,optional"`
+
+	// Proxy Traffic: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+	ProxyTraffic *NetworkTraffic `json:"proxy_traffic,omitempty" parquet:"proxy_traffic,optional"`
 
 	// Raw Data: The raw event/finding data as received from the source.
 	RawData *string `json:"raw_data,omitempty" parquet:"raw_data,optional"`
 
 	// Raw Data Size: The size of the raw data which was transformed into an OCSF event, in bytes.
 	RawDataSize *int64 `json:"raw_data_size,omitempty" parquet:"raw_data_size,optional"`
+
+	// Risk Details: Describes the risk associated with the finding.
+	RiskDetails *string `json:"risk_details,omitempty" parquet:"risk_details,optional"`
+
+	// Risk Level: The risk level, normalized to the caption of the risk_level_id value.
+	RiskLevel *string `json:"risk_level,omitempty" parquet:"risk_level,optional"`
+
+	// Risk Level ID: The normalized risk level id.
+	RiskLevelId *int32 `json:"risk_level_id,omitempty" parquet:"risk_level_id,optional"`
+
+	// Risk Score: The risk score as reported by the event source.
+	RiskScore *int32 `json:"risk_score,omitempty" parquet:"risk_score,optional"`
 
 	// Severity: The event/finding severity, normalized to the caption of the <code>severity_id</code> value. In the case of 'Other', it is defined by the source.
 	Severity *string `json:"severity,omitempty" parquet:"severity,optional"`
@@ -155,31 +230,56 @@ func (v *HTTPActivity) ValidateObservables() error {
 }
 
 var HTTPActivityFields = []arrow.Field{
+	{Name: "action", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "action_id", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
 	{Name: "activity_id", Type: arrow.PrimitiveTypes.Int32, Nullable: false},
 	{Name: "activity_name", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "actor", Type: ActorStruct, Nullable: true},
+	{Name: "api", Type: APIStruct, Nullable: true},
 	{Name: "app_name", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "attacks", Type: arrow.ListOf(MITREATTCKATLASStruct), Nullable: true},
+	{Name: "authorizations", Type: arrow.ListOf(AuthorizationResultStruct), Nullable: true},
 	{Name: "category_name", Type: arrow.BinaryTypes.String, Nullable: true},
 	{Name: "category_uid", Type: arrow.PrimitiveTypes.Int32, Nullable: false},
 	{Name: "class_name", Type: arrow.BinaryTypes.String, Nullable: true},
 	{Name: "class_uid", Type: arrow.PrimitiveTypes.Int32, Nullable: false},
-	{Name: "cloud", Type: CloudStruct, Nullable: false},
+	{Name: "confidence", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "confidence_id", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
+	{Name: "confidence_score", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
 	{Name: "connection_info", Type: NetworkConnectionInformationStruct, Nullable: true},
 	{Name: "count", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
+	{Name: "device", Type: DeviceStruct, Nullable: true},
+	{Name: "disposition", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "disposition_id", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
 	{Name: "dst_endpoint", Type: NetworkEndpointStruct, Nullable: true},
 	{Name: "duration", Type: arrow.PrimitiveTypes.Int64, Nullable: true},
 	{Name: "end_time", Type: arrow.FixedWidthTypes.Timestamp_ms, Nullable: true},
 	{Name: "enrichments", Type: arrow.ListOf(EnrichmentStruct), Nullable: true},
 	{Name: "file", Type: FileStruct, Nullable: true},
+	{Name: "firewall_rule", Type: FirewallRuleStruct, Nullable: true},
 	{Name: "http_cookies", Type: arrow.ListOf(HTTPCookieStruct), Nullable: true},
 	{Name: "http_request", Type: HTTPRequestStruct, Nullable: true},
 	{Name: "http_response", Type: HTTPResponseStruct, Nullable: true},
+	{Name: "is_alert", Type: arrow.FixedWidthTypes.Boolean, Nullable: true},
 	{Name: "ja4_fingerprint_list", Type: arrow.ListOf(JA4FingerprintStruct), Nullable: true},
+	{Name: "malware", Type: arrow.ListOf(MalwareStruct), Nullable: true},
+	{Name: "malware_scan_info", Type: MalwareScanInfoStruct, Nullable: true},
 	{Name: "message", Type: arrow.BinaryTypes.String, Nullable: true},
 	{Name: "metadata", Type: MetadataStruct, Nullable: false},
 	{Name: "observables", Type: arrow.ListOf(ObservableStruct), Nullable: true},
-	{Name: "osint", Type: arrow.ListOf(OSINTStruct), Nullable: false},
+	{Name: "policy", Type: PolicyStruct, Nullable: true},
+	{Name: "proxy_connection_info", Type: NetworkConnectionInformationStruct, Nullable: true},
+	{Name: "proxy_endpoint", Type: NetworkProxyEndpointStruct, Nullable: true},
+	{Name: "proxy_http_request", Type: HTTPRequestStruct, Nullable: true},
+	{Name: "proxy_http_response", Type: HTTPResponseStruct, Nullable: true},
+	{Name: "proxy_tls", Type: TransportLayerSecurityTLSStruct, Nullable: true},
+	{Name: "proxy_traffic", Type: NetworkTrafficStruct, Nullable: true},
 	{Name: "raw_data", Type: arrow.BinaryTypes.String, Nullable: true},
 	{Name: "raw_data_size", Type: arrow.PrimitiveTypes.Int64, Nullable: true},
+	{Name: "risk_details", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "risk_level", Type: arrow.BinaryTypes.String, Nullable: true},
+	{Name: "risk_level_id", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
+	{Name: "risk_score", Type: arrow.PrimitiveTypes.Int32, Nullable: true},
 	{Name: "severity", Type: arrow.BinaryTypes.String, Nullable: true},
 	{Name: "severity_id", Type: arrow.PrimitiveTypes.Int32, Nullable: false},
 	{Name: "src_endpoint", Type: NetworkEndpointStruct, Nullable: true},
