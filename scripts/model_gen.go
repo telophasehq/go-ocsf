@@ -459,21 +459,11 @@ func removeProfileFields(objects, profiles map[string]interface{}) {
 		objectProfiles := object["profiles"].([]interface{})
 		for _, objectProfileName := range objectProfiles {
 			objectProfileName := objectProfileName.(string)
-			profile := profiles[objectProfileName].(map[string]interface{})
-
 			objectAttributes := objects[objectName].(map[string]interface{})["attributes"].(map[string]interface{})
 
-			profileFields := profile["attributes"].(map[string]interface{})
-			for profileFieldName := range profileFields {
-				objectProfileAttr, ok := objectAttributes[profileFieldName]
-				if !ok || objectProfileAttr.(map[string]interface{})["requirement"] == "required" {
-					continue
-				}
-				delete(objectAttributes, profileFieldName)
-			}
+			delete(objectAttributes, objectProfileName)
 		}
 	}
-	return
 }
 
 func resolveOCSFType(targetType string, types map[string]interface{}) (string, error) {

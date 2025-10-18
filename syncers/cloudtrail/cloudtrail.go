@@ -586,15 +586,6 @@ func (s *Syncer) ToOCSF(ctx context.Context, event CloudtrailEvent) (ocsf.APIAct
 		ClassUid:     int32(classUID),
 		Status:       &status,
 		StatusId:     int32Ptr(int32(statusID)),
-		Cloud: ocsf.Cloud{
-			Provider: "AWS",
-			Region:   stringPtr(event.AwsRegion),
-			Account: &ocsf.Account{
-				TypeId: int32Ptr(10), // AWS Account
-				Type:   stringPtr("AWS Account"),
-				Uid:    stringPtr(event.RecipientAccountID),
-			},
-		},
 
 		Resources:  resources,
 		Severity:   &severity,
