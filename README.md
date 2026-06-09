@@ -107,6 +107,32 @@ func main() {
 - Google Workspace Logs (coming soon)
 - AWS CloudTrail (coming soon)
 
+## Testing
+
+Run all tests:
+
+```bash
+go test ./...
+```
+
+Run generator tests only:
+
+```bash
+go test ./scripts -run Test -count=1
+```
+
+Run the v1.7.0 observable validation tests only:
+
+```bash
+go test . -run TestValidateObservablesV170 -count=1
+```
+
+Notes:
+
+- `scripts/model_gen_test.go` includes compatibility tests for schema sanitization and `object_t` generation behavior.
+- It also includes formatter fallback tests that simulate `goimports` failure and verify fallback to `gofmt`.
+- `observables_v1_7_0_test.go` validates generated `ValidateObservables()` behavior for representative v1.7.0 models.
+
 ## Contributing
 
 We welcome contributions to improve or expand functionality.
