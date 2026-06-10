@@ -22,7 +22,7 @@ type Policy struct {
 	// Name: The policy name. For example: <code>AdministratorAccess Policy</code>.
 	Name *string `json:"name,omitempty" parquet:"name,optional"`
 
-	// Type: The policy type. For example: <code>Identity Policy, Resource Policy, Service Control Policy, etc./code>.
+	// Type: The policy type. For example: <code>Identity Policy, Resource Policy, Service Control Policy, etc.</code>.
 	Type *string `json:"type,omitempty" parquet:"type,optional"`
 
 	// Unique ID: A unique identifier of the policy instance.
